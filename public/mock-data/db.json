@@ -1,0 +1,28 @@
+{
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Planejamento da sprint",
+        "description": "Definir metas e tasks da semana",
+        "status": "pendente",
+        "responsible": "John Doe",
+        "dueDate": "2025-04-18"
+      },
+      {
+        "id": 2,
+        "title": "Revisar PR #GESTRAN-85",
+        "description": "Verificar mudanças do pull request",
+        "status": "en desenvolvimento",
+        "responsible": "Mary Jane",
+        "dueDate": "2025-04-20"
+      },
+      {
+        "id": 3,
+        "title": "Deploy em prod",
+        "description": "Subir versão 1.0 do projeto",
+        "status": "concluida",
+        "responsible": "Jhonny",
+        "dueDate": "2025-04-10"
+      }
+    ]
+  }
