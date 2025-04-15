@@ -1,0 +1,38 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="task-form">
+    <div>
+      <label>Título</label>
+      <input formControlName="title" />
+      <small *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
+        Título é obrigatório (mín. 3 caracteres).
+      </small>
+    </div>
+  
+    <div>
+      <label>Descrição</label>
+      <textarea formControlName="description"></textarea>
+    </div>
+  
+    <div>
+      <label>Status</label>
+      <select formControlName="status">
+        <option value="pendente">Pendente</option>
+        <option value="em_andamento">Em andamento</option>
+        <option value="concluida">Concluída</option>
+      </select>
+    </div>
+  
+    <div>
+      <label>Responsável</label>
+      <input formControlName="responsible" />
+    </div>
+  
+    <div>
+      <label>Data de Entrega</label>
+      <input type="date" formControlName="dueDate" />
+    </div>
+  
+    <div class="task-form__actions">
+      <button type="submit" [disabled]="form.invalid">Salvar</button>
+      <button type="button" (click)="close()">Cancelar</button>
+    </div>
+  </form>
