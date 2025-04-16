@@ -1,7 +1,24 @@
+<form [formGroup]="filterForm" class="filters">
+    <mat-form-field appearance="fill">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="">Todos</mat-option>
+        <mat-option value="pendente">Pendente</mat-option>
+        <mat-option value="em_desenvolvimento">Em desenvolvimento</mat-option>
+        <mat-option value="concluida">Concluída</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Responsável</mat-label>
+      <input matInput formControlName="responsible" placeholder="Filtrar por nome" />
+    </mat-form-field>
+  </form>
+
 <table mat-table [dataSource]="tasks" class="mat-elevation-z8">
 
     <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef >Data</th>
+        <th mat-header-cell *matHeaderCellDef >Vencimento</th>
         <td mat-cell  *matCellDef="let task" >{{task.date }}</td>
     </ng-container>
 
@@ -10,27 +27,31 @@
         <td mat-cell  *matCellDef="let task" >{{task.title}}</td>
     </ng-container>
 
+    <ng-container matColumnDef="responsible">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Responsável</th>
+        <td mat-cell *matCellDef="let task">{{ task.responsible }}</td>
+    </ng-container>
+
+
     <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef >Status</th>
         <td mat-cell  *matCellDef="let task" >{{ task.status }}</td>
     </ng-container>
-
+    
     <ng-container matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef >Descrição</th>
-        <td mat-cell  *matCellDef="let task" >{{ task.desc }}</td>
+        <td mat-cell  *matCellDef="let task" >{{ task.description }}</td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef >Ações</th>
-        <td mat-cell  *matCellDef="let task" >
-
-            <button mat-icon-button extended matTooltip="Excluir" class="delete-button" (click)="deleteTask(task)">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete"></mat-icon>
-            </button>
-
-            <button mat-icon-button extended matTooltip="Atualizar" class="update-button" (click)="updateTask(task)">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="edit"></mat-icon>
-            </button>
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let task">
+          <button mat-icon-button (click)="updateTask(task)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteTask(task.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </td>
     </ng-container>
 
@@ -39,4 +60,13 @@
     
 </table>
 
-<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+
+<app-modal *ngIf="showModal" (close)="closeModal()">
+    <app-task-form
+      [task]="selectedTask"
+      (save)="saveTask($event)"
+      (cancel)="closeModal()"
+    ></app-task-form>
+</app-modal>
+
