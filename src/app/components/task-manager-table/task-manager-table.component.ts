@@ -77,6 +77,7 @@ export class TaskManagerTableComponent implements OnInit, AfterViewInit {
       this.tasks = tasks;
       this.loading = false;
     });
+   
   }
 
   applyFilter(filters: any) {

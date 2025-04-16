@@ -1,7 +1,7 @@
 {
   "tasks": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Planejamento da sprint",
       "description": "Definir metas e tasks da semana",
       "status": "PENDING",
@@ -9,7 +9,7 @@
       "dueDate": "2025-04-18"
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Revisar PR #GESTRAN-85",
       "description": "Verificar mudanças do pull request",
       "status": "IN_DEVELOPMENT",
@@ -17,7 +17,7 @@
       "dueDate": "2025-04-20"
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Deploy em prod",
       "description": "Subir versão 1.0 do projeto",
       "status": "FINISHED",
@@ -39,6 +39,14 @@
       "status": "IN_DEVELOPMENT",
       "responsible": "Raul",
       "dueDate": "2025-04-17"
+    },
+    {
+      "id": "ada8",
+      "title": "Todo tests TaskManagerTable",
+      "description": "Fazer code review do task-manager-table.spec.ts e melhorar performance dos testes unitários",
+      "status": "PENDING",
+      "responsible": "João",
+      "dueDate": "2025-04-18"
     }
   ]
 }

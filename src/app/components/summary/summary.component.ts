@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Task } from '../../models/task';
 import { TaskStatus } from '../../models/enum/task.status';
 
@@ -6,9 +6,10 @@ import { TaskStatus } from '../../models/enum/task.status';
   selector: 'app-summary',
   imports: [],
   templateUrl: './summary.component.html',
-  styleUrl: './summary.component.scss'
+  styleUrl: './summary.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SummaryComponent implements AfterViewInit {
+export class SummaryComponent implements OnInit {
 
   @Input()
   tasks: Task[] = [];
@@ -22,7 +23,7 @@ export class SummaryComponent implements AfterViewInit {
 
    
   }
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.total = this.tasks.length;
     this.totalPending = this.tasks.filter(t => t.status === TaskStatus.PENDING).length;
     this.totalInDev = this.tasks.filter(t => t.status === TaskStatus.IN_DEVELOPMENT).length;
