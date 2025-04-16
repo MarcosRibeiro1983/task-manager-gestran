@@ -3,7 +3,6 @@ import { TaskManagerListComponent } from './pages/task-manager-list/task-manager
 
 export const routes: Routes = [
 
-
     {
         path: '', component: TaskManagerListComponent
     }

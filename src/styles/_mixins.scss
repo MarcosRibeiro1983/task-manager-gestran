@@ -1,0 +1,33 @@
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  @mixin respond-to($breakpoint) {
+    @if $breakpoint == sm {
+      @media (max-width: 600px) { @content; }
+    }
+    @else if $breakpoint == md {
+      @media (max-width: 960px) { @content; }
+    }
+    @else if $breakpoint == lg {
+      @media (max-width: 1280px) { @content; }
+    }
+  }
+  
+  // Mixin para botão
+  @mixin button-style($bg, $color: #fff) {
+    background-color: $bg;
+    color: $color;
+    border: none;
+    border-radius: $radius-sm;
+    padding: $spacing-unit $spacing-unit * 2;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: darken($bg, 10%);
+    }
+  }
