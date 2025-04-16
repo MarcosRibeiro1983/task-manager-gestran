@@ -1,59 +1,57 @@
 <form [formGroup]="form" (ngSubmit)="submit()" class="task-form">
-    
-    <mat-form-field appearance="outline">
-    <mat-label>Titulo</mat-label>
+  <mat-form-field appearance="outline">
+  <mat-label>Titulo</mat-label>
+  <input
+    matInput
+    placeholder="Digite o nome da tarefa"
+    formControlName="title"
+    required
+  />
+  @if (form.get('title')?.invalid && form.get('title')?.touched) {
+    <mat-error>Título é obrigatório (mín. 3 caracteres).</mat-error>
+  }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+  <mat-label>Descrição</mat-label>
+  <textarea matInput formControlName="description"></textarea>
+  @if (form.get('description')?.invalid && form.get('description')?.touched) {
+    <mat-error>A descrição da tarefa é obrigátoria</mat-error>
+  }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+  <mat-label>Status</mat-label>
+  <mat-select formControlName="status">
+    @for (status of statusLIST; track status) {
+      <mat-option [value]="status.value">{{status.label}}</mat-option>
+    }
+  </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Responsável</mat-label>
     <input
-        matInput
-        placeholder="Digite o nome da tarefa"
-        formControlName="title"
-        required
-    />
-    @if (form.get('title')?.invalid && form.get('title')?.touched) {
-        <mat-error>Título é obrigatório (mín. 3 caracteres).</mat-error>
+      matInput
+      placeholder="Digite o nome do responsável"
+      formControlName="responsible"
+      required />
+    @if (form.get('responsible')?.invalid && form.get('responsible')?.touched) {
+      <mat-error>O nome do responsável é obrigatório</mat-error>
     }
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-    <mat-label>Descrição</mat-label>
-    <textarea matInput formControlName="description"></textarea>
-    @if (form.get('description')?.invalid && form.get('description')?.touched) {
-        <mat-error>A descrição da tarefa é obrigátoria</mat-error>
-    }
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-    <mat-label>Status</mat-label>
-    <mat-select formControlName="status">
-        <mat-option value="pendente">Pendente</mat-option>
-        <mat-option value="em_desenvolvimento">Em desenvolvimento</mat-option>
-        <mat-option value="concluida">Concluída</mat-option>
-    </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-        <mat-label>Responsável</mat-label>
-        <input
-          matInput
-          placeholder="Digite o nome do responsável"
-          formControlName="responsible"
-          required
-        />
-        @if (form.get('responsible')?.invalid && form.get('responsible')?.touched) {
-          <mat-error>O nome do responsável é obrigatório</mat-error>
-        }
-    </mat-form-field>
-      
-    <mat-form-field>
-      <mat-label>Data de Entrega</mat-label>
-      <input matInput type="date" formControlName="dueDate" />
-      @if (form.get('dueDate')?.invalid && form.get('dueDate')?.touched) {
-        <mat-error>A data de entrega é obrigátoria</mat-error>
-    }
-    </mat-form-field>
-  
-    <div class="task-form__actions">
-      <button mat-flat-button type="submit" [disabled]="form.invalid">Salvar</button>
-      <button mat-flat-button type="button" (click)="close()">Cancelar</button>
-    </div>
+  </mat-form-field>
     
-  </form>
+  <mat-form-field>
+    <mat-label>Data de Entrega</mat-label>
+    <input matInput type="date" formControlName="dueDate" />
+    @if (form.get('dueDate')?.invalid && form.get('dueDate')?.touched) {
+      <mat-error>A data de entrega é obrigátoria</mat-error>
+    }
+  </mat-form-field>
+
+  <div class="task-form__actions">
+    <button mat-flat-button type="submit" [disabled]="form.invalid">Salvar</button>
+    <button mat-flat-button type="button" (click)="close()">Cancelar</button>
+  </div>
+    
+</form>

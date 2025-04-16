@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Planejamento da sprint",
       "description": "Definir metas e tasks da semana",
-      "status": "pendente",
+      "status": "PENDING",
       "responsible": "John Doe",
       "dueDate": "2025-04-18"
     },
@@ -12,7 +12,7 @@
       "id": 2,
       "title": "Revisar PR #GESTRAN-85",
       "description": "Verificar mudanças do pull request",
-      "status": "en desenvolvimento",
+      "status": "IN_DEVELOPMENT",
       "responsible": "Mary Jane",
       "dueDate": "2025-04-20"
     },
@@ -20,17 +20,25 @@
       "id": 3,
       "title": "Deploy em prod",
       "description": "Subir versão 1.0 do projeto",
-      "status": "concluida",
+      "status": "FINISHED",
       "responsible": "Jhonny",
       "dueDate": "2025-04-10"
     },
     {
       "id": "c796",
-      "title": "Discovery",
+      "title": "Discovery 2",
       "description": "Discovery do retorno da api de cadastro de clientes",
-      "status": "pendente",
+      "status": "PENDING",
       "responsible": "Luiza",
       "dueDate": "2025-04-10"
+    },
+    {
+      "id": "5826",
+      "title": "Correção de bugs",
+      "description": "Corrigir bugs de carregamento ao iniciar a aplicação",
+      "status": "IN_DEVELOPMENT",
+      "responsible": "Raul",
+      "dueDate": "2025-04-17"
     }
   ]
 }
