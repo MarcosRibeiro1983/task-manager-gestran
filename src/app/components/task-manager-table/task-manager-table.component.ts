@@ -1,6 +1,6 @@
 
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -32,7 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrl: './task-manager-table.component.scss',
   providers: [ { provide: MatPaginatorIntl, useClass: CustomPaginator }]
 })
-export class TaskManagerTableComponent implements OnInit, AfterViewInit {
+export class TaskManagerTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   dataSource = new MatTableDataSource<Task>();
   tasks: Task[] = [];
@@ -63,6 +63,13 @@ export class TaskManagerTableComponent implements OnInit, AfterViewInit {
       .subscribe(filters => {
         this.applyFilter(filters);
       });
+  }
+
+  ngOnChanges(changes: any): void {
+    this.dataSource = new MatTableDataSource<Task>(this.tasks)
+    if(this.paginator) {
+      this.dataSource.paginator = this.paginator;
+    }
   }
 
   ngAfterViewInit() {
