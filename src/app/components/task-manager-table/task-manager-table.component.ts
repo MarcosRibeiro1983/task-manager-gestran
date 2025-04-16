@@ -1,21 +1,21 @@
 
-import { MatButtonModule } from '@angular/material/button';
-import { AfterViewInit, Component, EventEmitter,OnInit, Output, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import {  MatIconModule } from '@angular/material/icon'
-import { MatPaginator, MatPaginatorModule  } from '@angular/material/paginator'
-import { BehaviorSubject, debounceTime, Subscription, switchMap } from 'rxjs';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { TaskService } from '../../services/task.service';
-import { Task } from '../../models/task';
 import { CommonModule } from '@angular/common';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { BehaviorSubject, debounceTime } from 'rxjs';
+import { Task } from '../../models/task';
+import { TaskService } from '../../services/task.service';
 import { ModalComponent } from "../modal/modal.component";
 import { TaskFormComponent } from "../task-form/task-form.component";
-import { MatSort } from '@angular/material/sort';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-task-manager-table',
@@ -38,7 +38,6 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class TaskManagerTableComponent implements OnInit, AfterViewInit {
 
-  tasks: Task[] = [];
   dataSource = new MatTableDataSource<Task>();
   filters$ = new BehaviorSubject<any>({});
   selectedTask?: Task;
@@ -52,7 +51,7 @@ export class TaskManagerTableComponent implements OnInit, AfterViewInit {
   constructor(private taskService: TaskService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.loadTasks();
+    this.fetchTasks();
 
     this.filterForm = this.fb.group({
       status: [''],
@@ -71,7 +70,7 @@ export class TaskManagerTableComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  loadTasks() {
+  fetchTasks() {
     this.taskService.getTasks().subscribe(tasks => {
       this.dataSource.data = tasks;
     });
@@ -102,7 +101,7 @@ export class TaskManagerTableComponent implements OnInit, AfterViewInit {
 
   deleteTask(id: number) {
     this.taskService.deleteTask(id).subscribe(() => {
-      this.loadTasks();
+      this.fetchTasks();
     });
   }
 
@@ -113,7 +112,7 @@ export class TaskManagerTableComponent implements OnInit, AfterViewInit {
 
     req.subscribe(() => {
       this.showModal = false;
-      this.loadTasks();
+      this.fetchTasks();
     });
   }
 

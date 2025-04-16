@@ -1,25 +1,36 @@
 <form [formGroup]="filterForm" class="filters">
-    <mat-form-field appearance="fill">
-      <mat-label>Status</mat-label>
-      <mat-select formControlName="status">
-        <mat-option value="">Todos</mat-option>
-        <mat-option value="pendente">Pendente</mat-option>
-        <mat-option value="em_desenvolvimento">Em desenvolvimento</mat-option>
-        <mat-option value="concluida">Concluída</mat-option>
-      </mat-select>
-    </mat-form-field>
-  
-    <mat-form-field appearance="fill">
-      <mat-label>Responsável</mat-label>
-      <input matInput formControlName="responsible" placeholder="Filtrar por nome" />
-    </mat-form-field>
-  </form>
 
-<table mat-table [dataSource]="tasks" class="mat-elevation-z8">
+    <div class="d-flex justify-content-between">
+        <div>
+            <mat-form-field appearance="fill" class="me-2">
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="status">
+                <mat-option value="">Todos</mat-option>
+                <mat-option value="pendente">Pendente</mat-option>
+                <mat-option value="em_desenvolvimento">Em desenvolvimento</mat-option>
+                <mat-option value="concluida">Concluída</mat-option>
+              </mat-select>
+            </mat-form-field>
+          
+            <mat-form-field appearance="fill">
+              <mat-label>Responsável</mat-label>
+              <input matInput formControlName="responsible" placeholder="Filtrar por nome" />
+            </mat-form-field>
+        </div>
+
+        <div>
+            <button mat-flat-button (click)="createTask()" matTooltip="Criar nova tarefa">
+                <mat-icon>check</mat-icon>Nova tarefa
+            </button>
+        </div>
+    </div>
+</form>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mb-3">
 
     <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef >Vencimento</th>
-        <td mat-cell  *matCellDef="let task" >{{task.date }}</td>
+        <td mat-cell  *matCellDef="let task" >{{task.dueDate | date: 'dd/MM/YYYY'}}</td>
     </ng-container>
 
     <ng-container matColumnDef="title">
@@ -45,11 +56,11 @@
 
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Ações</th>
-        <td mat-cell *matCellDef="let task">
-          <button mat-icon-button (click)="updateTask(task)">
+        <td mat-cell *matCellDef="let task" >
+          <button mat-icon-button matTooltip="Editar tarefa" class="me-2" (click)="updateTask(task)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="deleteTask(task.id)">
+          <button mat-icon-button matTooltip="Excluir tarefa" color="warn" (click)="deleteTask(task.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
