@@ -14,6 +14,7 @@ import { ModalComponent } from "../modal/modal.component";
 import { TaskFormComponent } from "../task-form/task-form.component";
 import { TASK_STATUS_LIST, TASK_STATUS_LIST_MAP } from '../../models/enum/task.status';
 import { SummaryComponent } from "../summary/summary.component";
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-task-manager-table',
@@ -24,7 +25,8 @@ import { SummaryComponent } from "../summary/summary.component";
     ...MaterialImports,
     ModalComponent,
     TaskFormComponent,
-    SummaryComponent
+    SummaryComponent,
+    HttpClientModule
 ],
   templateUrl: './task-manager-table.component.html',
   styleUrl: './task-manager-table.component.scss',
