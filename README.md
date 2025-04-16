@@ -12,6 +12,16 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
+## Json-Server
+json-server --watch public/mock-data/db.json --port 3000
+
+Json server started on PORT: 3000 access to API service tasks
+
+GET http://localhost:3000/tasks
+POST http://localhost:3000/tasks
+PUT http://localhost:3000/tasks/:id
+DELETE http://localhost:3000/tasks/:id
+
 ## Code scaffolding
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
